@@ -24,6 +24,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'get_data',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -58,12 +60,41 @@ TEMPLATES = [
 WSGI_APPLICATION = 'managementapp.wsgi.application'
 
 
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': 'us-cdbr-iron-east-04.cleardb.net',
+        'USER': 'bfcd4b322c6a83',
+        'NAME': 'heroku_bf0d9aa88fd9c5b',
+        'PASSWORD': 'beddbea6',
+        'OPTIONS': {'ssl': {'ca':'cleardb-ca.pem', 'cert':'bfcd4b322c6a83-cert.pem', 'key':'cleardb_id-key.pem'},},
+    }
+}
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'HOST': '/opt/lampp/var/mysql/mysql.sock',
+#         'USER': 'root',
+#         'NAME': 'project1',
+#         'PASSWORD': '',
+#         'PORT': '7777',
+#     }
+# }
+
+
+
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-import dj_database_url
-DATABASES = {
-    'default': dj_database_url.config()
-}
+if os.environ.get('DATABASE_URL', None):
+    import dj_database_url
+    DATABASES['default'] = dj_database_url.config()
+
+
+DATABASES['default']['ENGINE'] = 'django.db.backends.mysql'
+
+
 
 
 # Internationalization
