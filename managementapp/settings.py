@@ -87,12 +87,12 @@ DATABASES = {
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-if os.environ.get('DATABASE_URL', None):
-    import dj_database_url
-    DATABASES['default'] = dj_database_url.config()
+# if os.environ.get('DATABASE_URL', None):
+#     import dj_database_url
+#     DATABASES['default'] = dj_database_url.config()
 
 
-DATABASES['default']['ENGINE'] = 'django.db.backends.mysql'
+# DATABASES['default']['ENGINE'] = 'django.db.backends.mysql'
 
 
 
