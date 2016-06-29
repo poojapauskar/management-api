@@ -35,15 +35,13 @@ def get_queryset(request):
   # print >> sys.stderr,objects
 
 
-  # from django.db import connection, transaction
-  # cursor = connection.cursor()
+  from django.db import connection, transaction
+  cursor = connection.cursor()
   
-  # cursor.execute("SELECT * FROM myguests")
-  # row = cursor.fetchall()
+  cursor.execute("SELECT * FROM myguests")
+  row = cursor.fetchall()
 
-  # print >> sys.stderr,row
-
-  row="abc"
+  print >> sys.stderr,row
   
   fields = []
   fields.append(
