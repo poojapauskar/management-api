@@ -35,7 +35,7 @@ def get_queryset(request):
   # print >> sys.stderr,objects
 
 
-  from django.db import connection, transaction
+  from django.db import connection
   cursor = connection.cursor()
   
   cursor.execute("SELECT * FROM myguests")
