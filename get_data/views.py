@@ -38,7 +38,7 @@ def get_queryset(request):
   from django.db import connection, transaction
   cursor = connection.cursor()
   
-  cursor.execute("SELECT * FROM myguests")
+  cursor.execute("SELECT * FROM tbl_department")
   row = cursor.fetchall()
 
   print >> sys.stderr,row
