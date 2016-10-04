@@ -29,66 +29,55 @@ def JSONResponse(data = None, status = StatusCode.OK):
 
 
 def get_queryset(request):
+
+  from push_notifications.models import APNSDevice, GCMDevice
+
+  # device = GCMDevice.objects.get(registration_id=gcm_reg_id)
+  # device.send_message("You've got mail")
+  # device.send_message(None, extra={"foo": "bar"})
+
+  # APNSDevice.objects.all().delete();
+  # APNSDevice.objects.create(name="uzma",registration_id="22c5f99004c65b813a3d3e43bffdf88dbffbba83e251d61561fdc6d769961ae9",device_id="918775655fe541759f2bd24704df0b74",active="true");
+
+  apns_token="22c5f99004c65b813a3d3e43bffdf88dbffbba83e251d61561fdc6d769961ae9";
+  device = APNSDevice.objects.get(registration_id=apns_token)
+  device.send_message("You've got mail") # Alert message may only be sent as text.
+  device.send_message(None, badge=5) # No alerts but with badge.
+  device.send_message(None, badge=1, extra={"foo": "bar"}) # Silent message with badge and added custom data.
+
+  # from push_notifications.models import APNSDevice, GCMDevice
+
+  # devices = GCMDevice.objects.filter(user__first_name="James")
+  # devices.send_message("Happy name day!")
+
+  fields=[];
+  # fields=({
+  #   'apns_devices':APNSDevice.objects.all()
+  #   })
   
-  import sys
-  # objects=Myguests.objects.all()
-  # print >> sys.stderr,objects
+
+  return JsonResponse((list(fields)),safe=False)
+
+  
+  # import sys
 
 
-  from django.db import connection, transaction
-  cursor = connection.cursor()
+  # from django.db import connection, transaction
+  # cursor = connection.cursor()
   
-  cursor.execute("SELECT * FROM tbl_department")
-  row = cursor.fetchall()
+  # cursor.execute("SELECT * FROM tbl_department")
+  # row = cursor.fetchall()
 
-  print >> sys.stderr,row
+  # print >> sys.stderr,row
   
-  fields = []
-  fields.append(
-          {
-           'feeds':row,
-           }
-        )
+  # fields = []
+  # fields.append(
+  #         {
+  #          'feeds':row,
+  #          }
+  #       )
     
   
  
-  return JsonResponse((list(fields)),safe=False)
-  #return objects
-
-
-  # import os
-
-  # LOGGING = {
-  #   'version': 1,
-  #   'disable_existing_loggers': False,
-  #   'handlers': {
-  #       'console': {
-  #           'class': 'logging.StreamHandler',
-  #       },
-  #   },
-  #   'loggers': {
-  #       'django': {
-  #           'handlers': ['console'],
-  #           'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
-  #       },
-  #   },
-  # }
-
-  # import logging
-
-  # # Get an instance of a logger
-  # logger = logging.getLogger(__name__)
-
-  # def my_view(request, arg1, arg):
-   
-  #   if bad_mojo:
-  #       # Log an error message
-  #       logger.error('Something went wrong!')
-
-  # logger.debug(friends_vz_id)
+  # return JsonResponse((list(fields)),safe=False)
   
-
-
-
-
-# Create your views here.

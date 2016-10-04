@@ -11,7 +11,7 @@ STATICFILES_DIRS = (
 SECRET_KEY = 'CanIHazS3cret?Meis1337'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -26,7 +26,13 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'rest_framework',
     'get_data',
+    'push_notifications',
 )
+
+PUSH_NOTIFICATIONS_SETTINGS = {
+# "GCM_API_KEY": "<your api="" key="">",
+"APNS_CERTIFICATE": "apns-dev.pem",
+}
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -38,6 +44,8 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
 )
+
+
 
 ROOT_URLCONF = 'managementapp.urls'
 
